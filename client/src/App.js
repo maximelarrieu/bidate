@@ -18,6 +18,8 @@ function App() {
           <AccountData accountIndex={0} units={"ether"} precision={3} />
           <h5>Ce que je récupère depuis la fonction get de mon contract Greeter :</h5>
           <ContractData contract="Greeter" method="get" />
+          <h5>Je peux modifier mon contract grace à la fonction set :</h5>
+          <ContractForm contract="Greeter" method="set" />
         </Fragment>
       </LoadingContainer>
     </DrizzleProvider>
