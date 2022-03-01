@@ -1,24 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Greeter from './artifacts/Greeter.json';
+import { DrizzleProvider } from '@drizzle/react-plugin';
+import { LoadingContainer, AccountData, ContractData, ContractForm } from '@drizzle/react-components';
+import { Fragment } from 'react';
+
+const drizzleOptions = {
+  contracts: [Greeter]
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DrizzleProvider options={drizzleOptions}>
+      <LoadingContainer>
+        <Fragment>
+          <h2>Hello World !</h2>
+          <h5>Mon compte :</h5>
+          <AccountData accountIndex={0} units={"ether"} precision={3} />
+          <h5>Ce que je récupère depuis la fonction get de mon contract Greeter :</h5>
+          <ContractData contract="Greeter" method="get" />
+        </Fragment>
+      </LoadingContainer>
+    </DrizzleProvider>
   );
 }
 
