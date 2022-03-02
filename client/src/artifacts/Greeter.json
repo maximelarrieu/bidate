@@ -25,8 +25,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.8.11+commit.d7f03943\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"get\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"_greeting\",\"type\":\"string\"}],\"name\":\"set\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"project:/contracts/Greeter.sol\":\"Greeter\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/Greeter.sol\":{\"keccak256\":\"0xaed128bd8dc9b4b126c475c04e68019ee5edaac2478d32d6b7856c2e7db0230d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7597a45d5a24d77a7ffd7677fbd4c7d2c0e6bedf4426281aee22d645d87e77f8\",\"dweb:/ipfs/QmP9FYVEoVAc1dZXABUuuVVurooniFUr7icWnzfxRcWW2Y\"]}},\"version\":1}",
@@ -3558,8 +3557,7 @@
     }
   },
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-03-01T23:01:51.546Z",
-  "networkType": "ethereum",
+  "updatedAt": "2022-03-02T16:09:33.804Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
