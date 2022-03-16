@@ -1,8 +1,8 @@
 import './App.css';
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 // import theme from "./theme";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes as Switch, Route, Link } from "react-router-dom";
 import { history } from "./helpers/history";
 import Login from "./components/login.component";
