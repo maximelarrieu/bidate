@@ -1,15 +1,34 @@
 import './App.css';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+// import theme from "./theme";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ChakraProvider, useDisclosure } from "@chakra-ui/react";
 import { BrowserRouter as Router, Routes as Switch, Route, Link } from "react-router-dom";
 import { history } from "./helpers/history";
-import AuthService from "./services/auth.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
-import Profile from "./components/profile.component"
+import Profile from "./components/profile.component";
+import ConnectButton from './components/connectButton.component';
+import AccountModal from "./components/accountModal.component";
 
-class App extends Component {
+export default function App() {
+
+
+  return (
+    <ChakraProvider>
+      <Router history={history}>
+        <Switch>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/profile" element={<Profile />} />
+        </Switch>
+      </Router>    
+    </ChakraProvider>
+  )
+}
+// class App extends Component {
   // constructor(props) {
   //   super(props);
   //   this.logOut = this.logOut.bind(this);
@@ -32,9 +51,9 @@ class App extends Component {
   // logOut() {
   //   AuthService.logout();
   // }
-  render() {
+  // render() {
     // const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
-    return (
+    // return (
       // <div>
       //   <nav className="navbar navbar-expand navbar-dark bg-dark">
       //     <Link to={"/"} className="navbar-brand">
@@ -97,17 +116,10 @@ class App extends Component {
       //     )}
       //   </nav>
       //   <div className="container mt-3">
-          <Router history={history}>
-            <Switch>
-              <Route exact path="/" element={<Home />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route exact path="/register" element={<Register />} />
-              <Route exact path="/profile" element={<Profile />} />
-            </Switch>
-          </Router>
-    //     </div>
-    //   </div>
-    );
-  }
-}
-export default App;
+
+//     //     </div>
+//     //   </div>
+//     );
+//   }
+// }
+// export default App;
