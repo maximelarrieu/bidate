@@ -7,7 +7,8 @@ import AuthService from "./services/auth.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
-import Profile from "./components/profile.component"
+import Carousel from "./components/menu.component";
+import Profile from "./components/profile.component";
 
 class App extends Component {
   // constructor(props) {
@@ -99,9 +100,10 @@ class App extends Component {
       //   <div className="container mt-3">
           <Router history={history}>
             <Switch>
-              <Route exact path="/" element={<Home />} />
               <Route exact path="/login" element={<Login />} />
               <Route exact path="/register" element={<Register />} />
+              <Route exact path="/home" element={<Home />} />
+              <Route exact path="/menu" element={<Carousel />} />
               <Route exact path="/profile" element={<Profile />} />
             </Switch>
           </Router>

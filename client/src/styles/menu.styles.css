@@ -1,0 +1,14 @@
+.slider {
+    margin: 20vh auto;
+    width: 25%;
+    Height: 10%;
+    background-color: blue;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+.slider.h1{
+    color: 000000;
+    margin: 10vh auto;
+    text-align: center;
+  }
