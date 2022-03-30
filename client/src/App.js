@@ -9,8 +9,8 @@ import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import Profile from "./components/profile.component";
-import ConnectButton from './components/connectButton.component';
-import AccountModal from "./components/accountModal.component";
+import Daters from './components/daters.component';
+import Dater from "./components/dater.component";
 
 export default function App() {
 
@@ -23,8 +23,10 @@ export default function App() {
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
           <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/todate" element={<Daters />} />
+          <Route exact path="/todate/:id" element={<Dater />} />
         </Switch>
-      </Router>    
+      </Router>
     </ChakraProvider>
   )
 }

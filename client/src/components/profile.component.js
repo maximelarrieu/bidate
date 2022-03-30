@@ -4,9 +4,6 @@ import { Flex, useDisclosure } from "@chakra-ui/react";
 import authService from "../services/auth.service";
 import ConnectButton from "./connectButton.component";
 import AccountModal from "./accountModal.component";
-// type Props = {
-//   children?: ReactNode;
-// };
 
 export default function Profile({ children }) {
 
