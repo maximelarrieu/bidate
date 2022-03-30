@@ -15,4 +15,8 @@ module.exports = (app) => {
     app.get('/api/moderator', [authJwt.verifyToken, authJwt.isModerator], controller.moderatorBoard);
 
     app.get('/api/admin', [authJwt.verifyToken, authJwt.isAdmin], controller.adminBoard);
+
+    app.get('/api/daters', [authJwt.verifyToken], controller.getDaters);
+
+    app.get('/api/dater/:id', [authJwt.verifyToken], controller.getDater);
 }
