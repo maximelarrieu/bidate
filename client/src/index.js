@@ -6,12 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import { DAppProvider } from "@usedapp/core";
 
 ReactDOM.render(
-  <React.StrictMode>
-    {/* <App /> */}
+  <React.Fragment>
     <DAppProvider config={{}}>
       <App />
     </DAppProvider>
-  </React.StrictMode>,
+  </React.Fragment>,
   document.getElementById('root')
 );
 

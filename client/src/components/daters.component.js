@@ -1,32 +1,28 @@
 import React, { Component, Fragment, useEffect, useState } from "react";
-import { ReactNode } from "react";
-import { Flex, useDisclosure } from "@chakra-ui/react";
 import authService from "../services/auth.service";
 import userService from "../services/user.service";
 import {Link} from "react-router-dom"
 
-
 const Daters = (props) => {
     const [daters, setDaters] = useState([])
     const currentUser = authService.getCurrentUser();
+    const [error, setError] = useState()
 
     useEffect(() => {
-        userService.getUsers().then(response => {
-            console.log("RESPONSE", response);
+        userService.getUsers()
+        .then(response => {
+            console.log('response', response)
             if(response.status === 200) {
-                console.log('daters received.')
+                console.log('daters received.');
+                setDaters(response.data.daters);
             } else {
-                let messageError = 'Impossible de récupérer la liste des utilisateurs';
-                return messageError;
+                setError(`No dater founded`);
             }
-            setDaters(response.data.daters)
         })
         .catch(error => {
             console.log(error);
         })
     }, [])
-
-    console.log('daters', daters);
 
     return (
         <div className="container">
@@ -36,13 +32,15 @@ const Daters = (props) => {
                 {
                     daters.length > 0
                     ?
-                    daters.map((dater) => {
+                    daters.map((dater, index) => {
                         return(
-                            <Link to={`/todate/${dater.id}`}><li key={dater.id}>{dater.username}</li></Link>
+                            <Link key={index} to={`/todate/${dater.id}`}>
+                                <li key={index}>{dater.username}</li>
+                            </Link>
                         )
                     })
                     :
-                    <h4>Aucun daters</h4>
+                    <h4>{error}</h4>
                 }
             </ul>
         </div>

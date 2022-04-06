@@ -1,8 +1,8 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
+const Type = db.type;
 const Role = db.role;
-const Op = db.Sequelize.Op;
 
 exports.allAccess = (req, res) => {
     res.status(200).send("Public Content.");
@@ -18,14 +18,32 @@ exports.moderatorBoard = (req, res) => {
 };
 
 exports.getDaters = async (req, res) => {
-    const users = await User.findAll();
-    res.status(200).send({ status: 200, daters: users});
+    const users = await User.findAll({
+        include: [
+            { model: Type, as: 'type' },
+            { model: Role, as: 'roles' }
+        ]
+    })
+    if(users.length > 0) {
+        res.status(200).send({ status: 200, daters: users});
+    } else {
+        res.status(201).send({ status: 201, daters: []});
+    }
 }
 
 exports.getDater = async (req, res) => {
     const id = req.params.id;
 
-    await User.findByPk(id).then((dater) => {
-        res.status(200).send({ status: 200, dater: dater})
+    await User.findByPk(id, {
+        include: [
+            { model: Type, as: 'type'},
+            { model: Role, as: 'roles' }
+        ]
+    }).then((dater) => {
+        if(dater) {
+            res.status(200).send({ status: 200, dater: dater})
+        } else {
+            res.status(201).send({ status: 201, dater: null})
+        }
     })
 }

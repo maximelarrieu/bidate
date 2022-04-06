@@ -12,27 +12,27 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-db.sequelize.sync({force: true}).then(() => {
-    console.log('Drop and resync Db');
-    initial();
-});
+// db.sequelize.sync({force: false}).then(() => {
+//     console.log('Drop and resync Db');
+//     initial();
+// });
 
-function initial() {
-    Role.create({
-        id: 1,
-        name: 'user'
-    });
+// function initial() {
+//     Role.create({
+//         id: 1,
+//         name: 'user'
+//     });
 
-    Role.create({
-        id: 2,
-        name: 'moderator'
-    });
+//     Role.create({
+//         id: 2,
+//         name: 'moderator'
+//     });
 
-    Role.create({
-        id: 3,
-        name: 'admin'
-    });
-}
+//     Role.create({
+//         id: 3,
+//         name: 'admin'
+//     });
+// }
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -43,6 +43,7 @@ app.use((req, res, next) => {
 
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
+require('./routes/type.routes')(app);
 
 // simple route
 app.get("/", (req, res) => {
