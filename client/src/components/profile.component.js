@@ -1,11 +1,10 @@
-import React, { Component, Fragment } from "react";
-import { ReactNode } from "react";
+import React, { Fragment } from "react";
 import { Flex, useDisclosure } from "@chakra-ui/react";
 import authService from "../services/auth.service";
 import ConnectButton from "./connectButton.component";
 import AccountModal from "./accountModal.component";
 
-export default function Profile({ children }) {
+export default function Profile() {
 
   const currentUser = authService.getCurrentUser();
   const { isOpen, onOpen, onClose } = useDisclosure();

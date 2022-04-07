@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import UserService from "../services/user.service";
+// import UserService from "../services/user.service";
 import Greeter from '../artifacts/Greeter.json';
 import { DrizzleProvider } from '@drizzle/react-plugin';
 import { LoadingContainer, AccountData, ContractData, ContractForm } from '@drizzle/react-components';

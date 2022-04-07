@@ -3,7 +3,7 @@ import React from 'react';
 // import theme from "./theme";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter as Router, Routes as Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes as Switch, Route } from "react-router-dom";
 import { history } from "./helpers/history";
 import NavBar from "./components/navbar.component";
 import Login from "./components/login.component";
