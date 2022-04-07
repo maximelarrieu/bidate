@@ -37,20 +37,8 @@ db.user = require('../models/user.model')(sequelize, Sequelize);
 db.role = require('../models/role.model')(sequelize, Sequelize);
 db.type = require('../models/type.model')(sequelize, Sequelize);
 db.userroles = require('../models/userRoles.model')(sequelize, Sequelize);
+db.date = require('../models/date.model')(sequelize, Sequelize);
 
-console.log('DB', db.connect);
-// db.role.belongsToMany(db.user, {
-//     through: "user_roles",
-//     foreignKey: "roleId",
-//     otherKey: "userId"
-// });
-// db.user.belongsToMany(db.role, {
-//     through: "user_roles",
-//     foreignKey: "userId",
-//     otherKey: "roleId"
-// });
-
-// db.ROLES = ["user", "admin", "moderator"];
 fs
   .readdirSync(__dirname)
   .filter(file => {

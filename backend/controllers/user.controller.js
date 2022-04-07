@@ -1,5 +1,4 @@
 const db = require("../models");
-const config = require("../config/auth.config");
 const User = db.user;
 const Type = db.type;
 const Role = db.role;
@@ -18,12 +17,15 @@ exports.moderatorBoard = (req, res) => {
 };
 
 exports.getDaters = async (req, res) => {
-    const users = await User.findAll({
-        include: [
-            { model: Type, as: 'type' },
-            { model: Role, as: 'roles' }
-        ]
-    })
+    const users = await User.findAll(
+        {
+            where: { type_id: 1 },
+            include: [
+                { model: Type, as: 'type' },
+                { model: Role, as: 'roles' }
+            ]
+        }
+    )
     if(users.length > 0) {
         res.status(200).send({ status: 200, daters: users});
     } else {
