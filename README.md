@@ -63,7 +63,7 @@ Coté fonctionnel je pense que c'est bon, vous remarquerez que c'est bien laid m
 
 ### 3. Lancer le projet
 
-+ pull dans la branche DEVELOP => `$ git checkout develop (puis) $ git pull`
++ pull dans la branche `dev` => `$ git checkout dev (puis) $ git pull`
 + se rendre dans `client` => `$ cd client`
 + installer les packages => `$ npm install`
 + lancer le serveur => `$ npm run start`
@@ -81,6 +81,6 @@ Si ça va pas... RTFM mdr ou envoi moi msg pv je rep si t bg
 
 Vous pouvez vous rendre sur l'url `/register` pour créer votre compte (et aussi pourquoi pas créer le bouton pour redirigé ;) )
 
-> CREEZ VOTRE BRANCHE POUR FAIRE VOS MODIFS, ainsi vous pourrez faire tout le caca que vous souhaitez mais sans tout casser dans `develop` ! et merceee
+> CREEZ VOTRE BRANCHE POUR FAIRE VOS MODIFS, ainsi vous pourrez faire tout le caca que vous souhaitez mais sans tout casser dans `dev` ! et merceee
 
 Si y a un problème hésitez po à me dire! bisou les pd
