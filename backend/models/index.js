@@ -38,6 +38,8 @@ db.role = require('../models/role.model')(sequelize, Sequelize);
 db.type = require('../models/type.model')(sequelize, Sequelize);
 db.userroles = require('../models/userRoles.model')(sequelize, Sequelize);
 db.date = require('../models/date.model')(sequelize, Sequelize);
+db.daterbets = require('../models/daterbets.model')(sequelize, Sequelize);
+db.hunterbets = require('../models/hunterbets.model')(sequelize, Sequelize);
 
 fs
   .readdirSync(__dirname)

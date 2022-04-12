@@ -20,14 +20,16 @@ export default function App() {
     <ChakraProvider>
       <Router history={history}>
         <NavBar />
-        <Switch>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/profile" element={<Profile />} />
-          <Route exact path="/todate" element={<Daters />} />
-          <Route exact path="/todate/:id" element={<Dater />} />
-        </Switch>
+        <div style={{width: '95%', marginLeft: 'auto', marginRight: 'auto'}}>
+          <Switch>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/register" element={<Register />} />
+            <Route exact path="/profile" element={<Profile />} />
+            <Route exact path="/todate" element={<Daters />} />
+            <Route exact path="/todate/:id" element={<Dater />} />
+          </Switch>
+        </div>
       </Router>
     </ChakraProvider>
   )

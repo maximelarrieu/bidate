@@ -19,7 +19,7 @@ class AuthService {
         return axios.post(API_URL + "signup", {username, email, birthdate, type, password})
     }
     getCurrentUser() {
-        return JSON.parse(localStorage.getItem('user'));;
+        return JSON.parse(localStorage.getItem('user'));
     }
 }
 

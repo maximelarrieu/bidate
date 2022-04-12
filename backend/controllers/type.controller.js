@@ -12,6 +12,7 @@ exports.getTypes = async (req, res) => {
 }
 
 exports.getType = async (req, res) => {
+    console.log('params', req.params)
     const id = req.params.id;
 
     await Type.findByPk(id).then((type) => {

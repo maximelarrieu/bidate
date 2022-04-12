@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Date.belongsTo(models.User, {foreignKey: 'user_id', as: 'user'})
+      Date.hasMany(models.DaterBets, {foreignKey: 'date_id', as: 'dateb'})
+      Date.hasMany(models.HunterBets, {foreignKey: 'date_id', as: 'dateh'})
     }
   }
   Date.init({

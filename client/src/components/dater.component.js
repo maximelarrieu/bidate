@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
-// import { ReactNode } from "react";
-// import { Flex, useDisclosure } from "@chakra-ui/react";
+import HistoricDates from "./historicDates.component";
+import ADate from "./date.component";
+import SideProfile from "./sideProfile.component";
 import authService from "../services/auth.service";
 import userService from "../services/user.service";
 import dateService from "../services/date.service";
@@ -9,50 +10,11 @@ import { useParams } from 'react-router-dom';
 const Dater = (props) => {
     const { id } = useParams();
     const [date, setDate] = useState();
-    const [dates, setDates] = useState([]);
+    // const [remaining, setRemaining] = useState();
     // const [isEnded, setIsEnded] = useState();
     const [dater, setDater] = useState();
     const currentUser = authService.getCurrentUser();
     const [error, setError] = useState()
-
-    const calculateAge = (birthdate) => {
-        var ageDifMs = Date.now() - new Date(birthdate).getTime();
-        var ageDate = new Date(ageDifMs);
-        return Math.abs(ageDate.getUTCFullYear() - 1970);
-    }
-
-    const remainingTime = (startedAt) => {
-        let now = new Date()
-        let time = {}
-
-        let tmp = new Date(startedAt) - now
-        tmp = Math.floor(tmp/1000)
-        time.seconds = tmp % 60
-
-        tmp = Math.floor((tmp - time.seconds)/60)
-        time.minutes = tmp % 60
-
-        tmp = Math.floor((tmp - time.minutes)/60)
-        time.hours = tmp % 24
-
-        tmp = Math.floor((tmp - time.hours)/24)
-        time.days = tmp
-
-        let remaining = `End in `
-        if (time.days > 0) {
-            remaining += `${time.days}j `
-        }
-        if (time.hours > 0) {
-            remaining += `${time.hours}h `
-        }
-        if (time.minutes >= 0) {
-            remaining += `${time.minutes}m `
-        }
-        if (time.seconds >= 0) {
-            remaining += `${time.seconds}s`
-        }
-        return remaining
-    }
 
     useEffect(() => {
         userService.getUser(id)
@@ -64,6 +26,7 @@ const Dater = (props) => {
             }
         })
         .catch(err => {
+            console.log('response wtf', err)
             console.log(err);
         });
     }, [id]);
@@ -74,7 +37,7 @@ const Dater = (props) => {
             if(response.status === 200) {
                 setDate(response.data.date)
             } else {
-                setError(`Date not found`);
+                setError(`No current date`);
             }
         })
         .catch(err => {
@@ -82,145 +45,45 @@ const Dater = (props) => {
         })
     }, [id])
 
-    useEffect(() => {
-        dateService.findAllByDater(id)
-        .then(response => {
-            if(response.status === 200) {
-                setDates(response.data.dates)
-            } else {
-                setError(`Date not found`);
-            } 
-        })
-    }, [id])
-
-    const startDate = async (event) => {
-        event.preventDefault();
-        const data = {
-            user_id: currentUser.id,
-            isEnded: 0 
-        }
-        await dateService.create(data)
-        .then(response => {
-            if(response.status === 200) {
-                console.log('date started.')
-                setDate(response.data.date);
-            } else {
-                setError('Date not found')
-            }
-        })
-    }
-    
     return (
-        <div className="container">
+        <Fragment>
         <h5>current user: {currentUser.username}</h5>
             <div className="row">
-                <div className="col-sm-12 col-md-3 col-lg-3 border">
+                <div className="col-sm-12 col-md-2 col-lg-2 col-xl-1 border p-2">
                     {
-                        // If dater was found
                         dater !== undefined
                         ?
-                        // True
-                        <Fragment>
-                        <h3>{dater.username}</h3>
-                        <h4>{calculateAge(dater.birthdate)} ans</h4>
-                        <ul>
-                            <b>type:</b>
-                            <li>{dater.type.name}</li>
-                            <b>role(s):</b>
-                            {dater.roles.map((role, index) => {
-                                return (
-                                    <li key={index}>{role.name}</li>
-                                )
-                            })}
-                        </ul>
-                        </Fragment>
+                        <SideProfile dater={dater} error={error} />
                         :
-                        // False
-                        <h3>{error}</h3>
+                        <p>{error}</p>
                     }
                 </div>
-                <div className="col-sm-12 col-md-6 col-sm-3 border">
+                <div className="col-sm-12 col-md-7 col-lg-7 col-xl-9 border p-2">
                     {
-                        // If date was found
-                        date !== undefined
+                        dater !== undefined
                         ?
-                        <Fragment>
-                            <p>{remainingTime(date.endedAt)}</p>
-                            {
-                                // If dater type
-                                dater.type.name === 'hunter'
-                                ?
-                                // Is hunter
-                                <p>hunter space</p>
-                                :
-                                // Is dater
-                                <Fragment>
-                                    <p>dater space</p>
-                                    {
-                                        // If current user is date starter
-                                        date.user_id === currentUser.id
-                                        ?
-                                        // True
-                                        <button type='button' className='btn btn-secondary' disabled>Start my dates</button> 
-                                        :
-                                        // False
-                                        <Fragment></Fragment>
-                                        
-                                        
-                                    }
-                                </Fragment>
-                            }
-                        </Fragment>
+                            date !== undefined
+                            ?
+                            <Fragment>
+                                <ADate date={date} dater={dater} currentUser={currentUser} error={error} />
+                            </Fragment>
+                            :
+                            <Fragment>{error}</Fragment>
                         :
-                        // If date was not found
-                        <Fragment>
-                            {
-                                // If dater
-                                dater !== undefined
-                                ?
-                                // True
-                                    // If dater is current starter
-                                    dater.id === currentUser.id
-                                    ?
-                                    // True
-                                    <div>
-                                        <p>ah bon</p>
-                                        <button type='button' className='btn btn-primary' onClick={startDate}>Start my dates</button> 
-                                    </div>
-                                    :
-                                    // False
-                                    <Fragment>Aucun date en cours pour ce dater</Fragment>
-                                :
-                                // False
-                                <Fragment>nodater</Fragment>
-
-                            }
-                        </Fragment>
+                        <p>{error}</p>
                     }
                 </div>
-                <div className="col-sm-12 col-md-3 col-lg-3 border">
-                    <p>historique du dater</p>
-                    <ul>
-                        {
-                            // If dater has dates
-                            dates.length > 0
-                            ?
-                            // True
-                            dates.map((date, index) => {
-                                return (
-                                    <li key={index}>
-                                        { date.id } { date.createdAt } -&gt; { date.endedAt }
-                                    </li>
-                                )
-                            })
-                            :
-                            // False
-                            <Fragment>No dates for this dater</Fragment>
-                        }
-                    </ul>
+                <div className="col-sm-12 col-md-3 col-lg-3 col-xl-2 border p-2">
+                    {
+                        dater !== undefined
+                        ?
+                        <HistoricDates dater={dater} error={error} />
+                        :
+                        <p>{error}</p>
+                    }
                 </div>
             </div>
-        </div>
+        </Fragment>
     )
 }
 

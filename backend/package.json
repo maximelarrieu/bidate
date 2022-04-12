@@ -19,6 +19,7 @@
   "homepage": "https://github.com/maximelarrieu/bidate#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
