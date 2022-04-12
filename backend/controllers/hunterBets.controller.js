@@ -26,6 +26,28 @@ exports.create = async (req, res) => {
     }
 }
 
+exports.update = async (req, res) => {
+    const params = req.params
+    const betDay = `amount_${params.day}`
+    console.log("BETDAY", betDay)
+
+    const sql = `
+        UPDATE HunterBets
+        SET ${betDay} = ${randomAmount()}
+        WHERE user_id = ${req.userId}
+        AND dater_id = ${params.dater_id}
+        AND date_id = ${params.date_id}
+    `
+
+    const hunterbet = await sequelize.query(sql)
+
+    if(hunterbet[0].affectedRows !== 0) {
+        res.status(200).send({ status: 200, hunterbet: hunterbet[0]})
+    } else {
+        res.status(201).send({ status: 201, hunterbet: { message: 'nothing happened, 0 rows affected'} });
+    }
+}
+
 exports.findAllByDate = async (req, res) => {
     const params = req.params;
 
@@ -42,6 +64,22 @@ exports.findAllByDate = async (req, res) => {
         res.status(200).send({ status: 200, hunterBets: hunterBets});
     } else {
         res.status(201).send({ status: 201, hunterBets: []});
+    }
+}
+
+exports.hunterHasDaterBets = async (req, res) => {
+    const params = req.params
+    
+    const hunterbet = await HunterBets.findOne(
+        {
+            where: { user_id: req.userId, date_id: params.date_id, dater_id: params.dater_id }
+        }
+    );
+
+    if(hunterbet) {
+        res.status(200).send({ status: true, hunterbet: hunterbet});
+    } else {
+        res.status(201).send({ status: false, hunterbet: {}});
     }
 }
 

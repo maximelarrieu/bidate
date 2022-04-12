@@ -12,7 +12,11 @@ module.exports = (app) => {
 
     app.post('/api/hunter/bet/:dater_id/date/:date_id/:day', [authJwt.verifyToken], controller.create);
 
+    app.patch('/api/hunter/bet/:dater_id/date/:date_id/:day', [authJwt.verifyToken], controller.update)
+
     app.get('/api/hunter/bets/:date_id', [authJwt.verifyToken], controller.findAllByDate);
+
+    app.get('/api/hunter/bets/in/:date_id/for/:dater_id', [authJwt.verifyToken], controller.hunterHasDaterBets)
 
     app.get('/api/hunter/bets/in/:date_id/for/:dater_id/today/:day', [authJwt.verifyToken], controller.hunterHasBetsOnDaterToday)
 

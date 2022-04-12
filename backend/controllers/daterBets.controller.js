@@ -35,6 +35,7 @@ exports.update = async (req, res) => {
         UPDATE DaterBets
         SET ${betDay} = ${randomAmount()}
         WHERE user_id = ${req.userId}
+        AND date_id = ${params.date_id}
     `
 
     const daterbet = await sequelize.query(sql)

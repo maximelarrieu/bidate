@@ -44,14 +44,32 @@ const Bets = (props) => {
 
     const betOnDater = async (event, dater_id, date_id, day) => {
         event.preventDefault();
-        await hunterBetsService.create(dater_id, date_id, day)
-        .then(response => {
-            if(response.status === 200) {
-                console.log('hunter bet started.')
-                setBet(response.data.hunterbet);
-                console.log('bet', bet)
+        await hunterBetsService.hunterHasBetOnDate(date_id, dater_id)
+        .then(async response => {
+            console.log('has previous bets on this dater')
+            if(response.data.status === true) {
+                await hunterBetsService.update(dater_id, date_id, day)
+                .then(response => {
+                    console.log('hunter bet updated')
+                    console.log(response)
+                })
+                .catch(error => {
+                    console.log("ERROR:", error)
+                })
             } else {
-                setError('Bet not found')
+                await hunterBetsService.create(dater_id, date_id, day)
+                .then(response => {
+                    if(response.status === 200) {
+                        console.log('hunter bet started.')
+                        setBet(response.data.hunterbet);
+                        console.log('bet', bet)
+                    } else {
+                        setError('Bet not found')
+                    }
+                })
+                .catch(error => {
+                    console.log("ERROR", error)
+                })
             }
         })
         .catch(error => {
@@ -98,23 +116,7 @@ const Bets = (props) => {
                                                 ?
                                                 <button className="btn btn-sm btn-success" onClick={(e) => betOnDater(e, bet.userb.id, date.id)} disabled>Bet on</button>
                                                 :
-                                                    // <p>
-                                                    // {
-                                                    //     console.log('????', checkDaterBetToday(date.id, bet.userb.id, currentDay(date.endedAt)).then(result => console.log('RESILT', result)))
-                                                    // }
-                                                // </p>
-                                                
-                                                    checkDaterBetToday(date.id, bet.userb.id, currentDay(date.endedAt)).then(result => result === true)
-                                                    ?
-                                                    // if (result === true) {
-                                                        // return(
-                                                    <button className="btn btn-sm btn-success" onClick={(e) => betOnDater(e, bet.userb.id, date.id, currentDay(date.endedAt))} disabled>New bet tomorrow</button>
-                                                        // )
-                                                    // } else {
-                                                        // return(
-                                                    :
-                                                    <button className="btn btn-sm btn-success" onClick={(e) => betOnDater(e, bet.userb.id, date.id, currentDay(date.endedAt))}>Bet on</button>
-                                                            // )
+                                                <button className="btn btn-sm btn-success" onClick={(e) => betOnDater(e, bet.userb.id, date.id, currentDay(date.endedAt))}>Bet on</button>
                                                    
                                             }
                                         </td>

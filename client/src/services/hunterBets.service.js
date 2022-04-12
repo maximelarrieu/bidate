@@ -7,8 +7,16 @@ class HunterBetsService {
         return axios.post(API_URL + `hunter/bet/${dater_id}/date/${date_id}/${day}`, date_id, { headers: authHeader() } );
     }
 
+    update(dater_id, date_id, day) {
+        return axios.patch(API_URL + `hunter/bet/${dater_id}/date/${date_id}/${day}`, date_id, { headers: authHeader() } );
+    }
+
     findAllByDate(date_id) {
         return axios.get(API_URL + `hunter/bets/${date_id}`, { headers: authHeader() })
+    }
+
+    hunterHasBetOnDate(date_id, dater_id) {
+        return axios.get(API_URL + `hunter/bets/in/${date_id}/for/${dater_id}`, { headers: authHeader() })
     }
 
     hunterHasBetsOnDaterToday(date_id, dater_id, day) {
