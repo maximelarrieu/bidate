@@ -1,9 +1,17 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { DrizzleProvider } from '@drizzle/react-plugin';
+import Transaction from '../artifacts/Transaction.json';
+
+import { AccountData, ContractData, ContractForm } from '@drizzle/react-components';
 import { remainingTime } from "../helpers/remainingTime";
 import { currentDay } from "../helpers/currentDay";
 import dateService from "../services/date.service";
 import daterBetsService from "../services/daterBets.service";
 import Bets from "./bets.component";
+
+const drizzleOptions = {
+    contracts: [Transaction]
+}
 
 const ADate = (props) => {
     const date = props.date
@@ -81,6 +89,9 @@ const ADate = (props) => {
 
     return (
         <Fragment>
+            {/* <DrizzleProvider options={drizzleOptions}>
+                <AccountData accountIndex={0} units={"ether"} precision={3} />
+            </DrizzleProvider> */}
             <p>date content</p>
             {
                 // If in course date

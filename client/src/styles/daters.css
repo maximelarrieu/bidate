@@ -1,0 +1,15 @@
+a {
+    text-decoration: none;
+    color: black
+}
+
+a:hover .card {
+    color: black;
+    box-shadow: 2px 2px 20px 2px gray;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card-title {
+    font-size: 20px;
+    text-transform: uppercase;
+}

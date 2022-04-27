@@ -3,6 +3,7 @@ import React from 'react';
 // import theme from "./theme";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import ProtectedRoute from "./components/protectedRoute.component";
 import { BrowserRouter as Router, Routes as Switch, Route } from "react-router-dom";
 import { history } from "./helpers/history";
 import NavBar from "./components/navbar.component";
@@ -14,8 +15,6 @@ import Daters from './components/daters.component';
 import Dater from "./components/dater.component";
 
 export default function App() {
-
-
   return (
     <ChakraProvider>
       <Router history={history}>
@@ -25,9 +24,9 @@ export default function App() {
             <Route exact path="/" element={<Home />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
-            <Route exact path="/profile" element={<Profile />} />
-            <Route exact path="/todate" element={<Daters />} />
-            <Route exact path="/todate/:id" element={<Dater />} />
+            <Route exact path="/profile" element={<ProtectedRoute Component={Profile} />} />
+            <Route exact path="/todate" element={<ProtectedRoute Component={Daters} />}/>
+            <Route exact path="/todate/:id" element={<ProtectedRoute Component={Dater} />} />
           </Switch>
         </div>
       </Router>
