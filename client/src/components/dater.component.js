@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 const Dater = (props) => {
     const { id } = useParams();
-    const [date, setDate] = useState();
+    // const [date, setDate] = useState();
     // const [remaining, setRemaining] = useState();
     // const [isEnded, setIsEnded] = useState();
     const [dater, setDater] = useState();
@@ -20,6 +20,7 @@ const Dater = (props) => {
         userService.getUser(id)
         .then(response => {
             if(response.status === 200) {
+                console.log('response dater', response.data)
                 setDater(response.data.dater);
             } else {
                 setError(`Dater not found`);
@@ -27,23 +28,24 @@ const Dater = (props) => {
         })
         .catch(err => {
             console.log('response wtf', err)
-            console.log(err);
         });
     }, [id]);
 
-    useEffect(() => {
-        dateService.getCurrentDate(id)
-        .then(response => {
-            if(response.status === 200) {
-                setDate(response.data.date)
-            } else {
-                setError(`No current date`);
-            }
-        })
-        .catch(err => {
-            console.log('ERROR', err)
-        })
-    }, [id])
+    // useEffect(() => {
+    //     dateService.getCurrentDate(id)
+    //     .then(response => {
+    //         if(response.status === 200) {
+    //             setDate(response.data.date)
+    //         } else {
+    //             setError(`No current date`);
+    //         }
+    //     })
+    //     .catch(err => {
+    //         console.log('ERROR', err)
+    //     })
+    // }, [id])
+
+    console.log('dater in dater component', dater)
 
     return (
         <Fragment>
@@ -62,13 +64,13 @@ const Dater = (props) => {
                     {
                         dater !== undefined
                         ?
-                            date !== undefined
-                            ?
-                            <Fragment>
-                                <ADate date={date} dater={dater} currentUser={currentUser} error={error} />
-                            </Fragment>
-                            :
-                            <Fragment>{error}</Fragment>
+                            // date !== undefined
+                            // ?
+                            // <Fragment>
+                                <ADate dater={dater} currentUser={currentUser} error={error} />
+                            // </Fragment>
+                            // :
+                            // <Fragment>{error}</Fragment>
                         :
                         <p>{error}</p>
                     }

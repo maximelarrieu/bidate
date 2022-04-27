@@ -20,6 +20,10 @@ class UserService {
     getUser(id) {
         return axios.get(API_URL + `dater/${id}`, { headers: authHeader()});
     }
+
+    update(id, email) {
+        return axios.get(API_URL + `user/${id}`, { email }, { headers: authHeader()})
+    }
 }
 
 export default new UserService();

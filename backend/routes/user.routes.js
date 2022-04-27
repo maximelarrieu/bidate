@@ -19,4 +19,6 @@ module.exports = (app) => {
     app.get('/api/daters', [authJwt.verifyToken], controller.getDaters);
 
     app.get('/api/dater/:id', [authJwt.verifyToken], controller.getDater);
+
+    app.get('/api/user/:id', [authJwt.verifyToken], controller.update)
 }

@@ -49,3 +49,22 @@ exports.getDater = async (req, res) => {
         }
     })
 }
+
+exports.update = async (req, res) => {
+    const id = req.params.id;
+
+    await User.update(
+        { email: req.body.email },
+        {
+            where: {
+                id: id
+            }
+        }
+    ).then(dater => {
+        if(dater) {
+            res.status(200).send({ status: 200, dater: dater })
+        } else {
+            res.status(201).send({ status: 201, dater: null })
+        }
+    })
+}
