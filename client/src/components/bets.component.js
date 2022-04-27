@@ -131,9 +131,9 @@ const Bets = (props) => {
                         })
                         :
                         <tr>
-                            <td>{ error }</td>
-                            <td>{ error }</td>
-                            <td>{ error }</td>
+                            <td>X</td>
+                            <td>X</td>
+                            <td>X</td>
                         </tr>
 
                     }
