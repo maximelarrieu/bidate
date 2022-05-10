@@ -12,6 +12,8 @@ module.exports = (app) => {
 
     app.get('/api/user', [authJwt.verifyToken], controller.userBoard);
 
+    app.patch('/api/dater/:id', [authJwt.verifyToken], controller.setAddress)
+
     app.get('/api/moderator', [authJwt.verifyToken, authJwt.isModerator], controller.moderatorBoard);
 
     app.get('/api/admin', [authJwt.verifyToken, authJwt.isAdmin], controller.adminBoard);
@@ -21,4 +23,4 @@ module.exports = (app) => {
     app.get('/api/dater/:id', [authJwt.verifyToken], controller.getDater);
 
     app.get('/api/user/:id', [authJwt.verifyToken], controller.update)
-}
+}   

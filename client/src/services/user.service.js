@@ -24,6 +24,10 @@ class UserService {
     update(id, email) {
         return axios.get(API_URL + `user/${id}`, { email }, { headers: authHeader()})
     }
+
+    setUserAddress(id, address) {
+        return axios.patch(API_URL + `dater/${id}`, { address }, { headers: authHeader()})
+    }
 }
 
 export default new UserService();

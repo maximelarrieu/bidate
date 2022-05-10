@@ -12,6 +12,12 @@ body {
   text-transform: uppercase;
 }
 
+.page-subtitle {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 p {
   font-size: 18px;
 }

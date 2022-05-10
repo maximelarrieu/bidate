@@ -49,9 +49,9 @@ const Dater = (props) => {
 
     return (
         <Fragment>
-        <h5>current user: {currentUser.username}</h5>
+        <h5>dater page</h5>
             <div className="row">
-                <div className="col-sm-12 col-md-2 col-lg-2 col-xl-1 border p-2">
+                <div className="col-sm-12 col-md-3 col-lg-3 col-xl-2">
                     {
                         dater !== undefined
                         ?
@@ -60,14 +60,14 @@ const Dater = (props) => {
                         <p>{error}</p>
                     }
                 </div>
-                <div className="col-sm-12 col-md-7 col-lg-7 col-xl-9 border p-2">
+                <div className="col-sm-12 col-md-6 col-lg-6 col-xl-8">
                     {
                         dater !== undefined
                         ?
                             // date !== undefined
                             // ?
                             // <Fragment>
-                                <ADate dater={dater} currentUser={currentUser} error={error} />
+                            <ADate dater={dater} currentUser={currentUser} error={error} />
                             // </Fragment>
                             // :
                             // <Fragment>{error}</Fragment>

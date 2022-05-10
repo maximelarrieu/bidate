@@ -3,12 +3,12 @@ import authHeader from './auth-header';
 const API_URL = 'http://localhost:3330/api/';
 
 class HunterBetsService {
-    create(dater_id, date_id, day) {
-        return axios.post(API_URL + `hunter/bet/${dater_id}/date/${date_id}/${day}`, date_id, { headers: authHeader() } );
+    create(dater_id, date_id, amount, day) {
+        return axios.post(API_URL + `hunter/bet/${dater_id}/date/${date_id}/${day}`, amount, { headers: authHeader() } );
     }
 
-    update(dater_id, date_id, day) {
-        return axios.patch(API_URL + `hunter/bet/${dater_id}/date/${date_id}/${day}`, date_id, { headers: authHeader() } );
+    update(dater_id, date_id, amount, day) {
+        return axios.patch(API_URL + `hunter/bet/${dater_id}/date/${date_id}/${day}`, amount, { headers: authHeader() } );
     }
 
     findAllByDate(date_id) {

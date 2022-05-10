@@ -68,3 +68,22 @@ exports.update = async (req, res) => {
         }
     })
 }
+
+exports.setAddress = async (req, res) => {
+    const id = req.params.id
+
+    await User.update(
+        { address: req.body.address },
+        { 
+            where: {
+                id: id
+            }
+        }
+    ).then(dater => {
+        if(dater) {
+            res.status(200).send({ status: 200, dater: dater })
+        } else {
+            res.status(201).send({ status: 201, dater: null })
+        }
+    })
+}

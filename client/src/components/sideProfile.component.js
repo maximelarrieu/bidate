@@ -6,32 +6,22 @@ const SideProfile = (props) => {
     const error = props.error
 
     return (
-        <Fragment>
-            <h3>Dater:</h3>
+        <div className="shadow-lg p-3 mb-5 rounded text-center">
             {
                 // If dater was found
                 dater !== undefined
                 ?
                 // True
                 <Fragment>
-                <h3>{dater.username}</h3>
-                <h4>{calculateAge(dater.birthdate)} ans</h4>
-                <ul>
-                    <b>type:</b>
-                    <li>{dater.type.name}</li>
-                    <b>role(s):</b>
-                    {dater.roles.map((role, index) => {
-                        return (
-                            <li key={index}>{role.name}</li>
-                        )
-                    })}
-                </ul>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWIQtvI4R2veBQody_-coonotC4wtVntt5QCH-ACKXtMnfF5zy7vgqKj-84TGT3GoCD_o&usqp=CAU" className="card-img-top" alt="siuuuuu" />
+                    <h3 className="page-subtitle mt-3">{dater.username}</h3>
+                    <h4>{calculateAge(dater.birthdate)} ans</h4>
                 </Fragment>
                 :
                 // False
                 <h3>{error}</h3>
             }
-        </Fragment>
+        </div>
     )
 }
 

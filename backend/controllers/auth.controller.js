@@ -33,6 +33,7 @@ exports.signin = (req, res) => {
     }
   })
     .then(user => {
+      console.log('user.address', user.address)
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
@@ -53,6 +54,7 @@ exports.signin = (req, res) => {
         id: user.id,
         username: user.username,
         email: user.email,
+        address: user.address,
         type_id: user.type_id,
         accessToken: token
       });

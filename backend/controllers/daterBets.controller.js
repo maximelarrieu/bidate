@@ -17,7 +17,7 @@ exports.create = async (req, res) => {
 
     const sql = `
         INSERT INTO DaterBets (user_id, date_id, ${betDay}, createdAt, updatedAt)
-        VALUES (${req.userId}, ${params.date_id}, ${randomAmount()}, NOW(), NOW())
+        VALUES (${req.userId}, ${params.date_id}, ${req.body.amount}, NOW(), NOW())
     `
     const daterbet = await sequelize.query(sql)
     if(daterbet) {
@@ -33,7 +33,7 @@ exports.update = async (req, res) => {
     
     const sql = `
         UPDATE DaterBets
-        SET ${betDay} = ${randomAmount()}
+        SET ${betDay} = ${req.body.amount}
         WHERE user_id = ${req.userId}
         AND date_id = ${params.date_id}
     `

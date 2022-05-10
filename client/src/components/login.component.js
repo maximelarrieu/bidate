@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import AuthService from "../services/auth.service";
+
 const required = value => {
   if (!value) {
     return (
@@ -13,6 +14,7 @@ const required = value => {
     );
   }
 };
+
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -68,6 +70,9 @@ export default class Login extends Component {
       });
     }
   }
+
+
+
   render() {
     return (
       <div className="col-md-12">
@@ -132,6 +137,7 @@ export default class Login extends Component {
             />
           </Form>
         </div>
+        <a href="/register"><div className="btn btn-primary">Signup</div></a>
       </div>
     );
   }
