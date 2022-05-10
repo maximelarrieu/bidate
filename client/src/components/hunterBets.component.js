@@ -25,7 +25,7 @@ const HunterBets = (props) => {
 
     return (
         <Fragment>
-            <h3 className="title">my bets on daters</h3>
+            <h3 className="page-subtitle mt-4">Hunters bets on daters</h3>
             <div className="row">
                 {
                     bets.length > 0
