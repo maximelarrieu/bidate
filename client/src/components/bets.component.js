@@ -53,7 +53,7 @@ const Bets = (props) => {
         return transactionContract;
     }
 
-    const sendTransaction = async () => {
+    const sendTransaction = async (amount) => {
         try {
             const message = ''
             const keyword = ''
@@ -113,7 +113,7 @@ const Bets = (props) => {
         .catch(err => {
             console.log('ERROR', err)
         })
-    })
+    }, [bets])
 
     const betOnDater = async (event, dater_id, date_id, amount, day) => {
         const amounted = { amount: amount }
@@ -140,7 +140,7 @@ const Bets = (props) => {
                         setBet(response.data.hunterbet);
                         console.log('bet', bet)
                         console.log('send transac')
-                        sendTransaction()
+                        sendTransaction(amount)
                     } else {
                         setError('Bet not found')
                     }
@@ -166,9 +166,9 @@ const Bets = (props) => {
                 }
 
           return (
-            <div className="container mt-4">
-                <h3 className="page-subtitle">BETS EN COURS</h3>
-                <div className="table-responsive">
+            <div className="container mt-5">
+                <h3 className="page-subtitle">Bets in progress</h3>
+                <div className="table-responsive mt-2">
                     <table className="table table-bordered table-striped">
                         <thead className="table-dark">
                             <tr>
@@ -204,9 +204,15 @@ const Bets = (props) => {
                                                     ?
                                                     <button className="btn btn-sm btn-success" disabled>Bet on</button>
                                                     :
-                                                    <form onSubmit={sendTransaction()}>
-                                                        <input type="text" value={amount} onChange={e => setAmount(e.target.value)} />
-                                                        <input type="submit" value="Bet on" placeholder="Amount (ETH)" className="btn btn-sm btn-success" onClick={ (e) => betOnDater(e, bet.userb.id, date.id, amount, currentDay(date.endedAt)) } />
+                                                    <form onSubmit={sendTransaction}>
+                                                        <div class="row g-3 align-items-center">
+                                                            <div class="col-auto">
+                                                                <input type="text" value={bet.amount} className="form-control" onChange={e => setAmount(e.target.value)} />
+                                                            </div>
+                                                            <div class="col-auto">
+                                                                <input type="submit" value="Bet on" placeholder="Amount (ETH)" className="btn btn-success" onClick={ (e) => betOnDater(e, bet.userb.id, date.id, amount, currentDay(date.endedAt)) } />
+                                                            </div>
+                                                        </div>
                                                     </form>
                                                 }
                                             </td>

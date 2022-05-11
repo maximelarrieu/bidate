@@ -20,7 +20,6 @@ const Dater = (props) => {
         userService.getUser(id)
         .then(response => {
             if(response.status === 200) {
-                console.log('response dater', response.data)
                 setDater(response.data.dater);
             } else {
                 setError(`Dater not found`);
@@ -48,8 +47,7 @@ const Dater = (props) => {
     console.log('dater in dater component', dater)
 
     return (
-        <Fragment>
-        <h5>dater page</h5>
+        <div className="mt-5">
             <div className="row">
                 <div className="col-sm-12 col-md-3 col-lg-3 col-xl-2">
                     {
@@ -75,7 +73,7 @@ const Dater = (props) => {
                         <p>{error}</p>
                     }
                 </div>
-                <div className="col-sm-12 col-md-3 col-lg-3 col-xl-2 border p-2">
+                <div className="col-sm-12 col-md-3 col-lg-3 col-xl-2">
                     {
                         dater !== undefined
                         ?
@@ -85,7 +83,7 @@ const Dater = (props) => {
                     }
                 </div>
             </div>
-        </Fragment>
+        </div>
     )
 }
 

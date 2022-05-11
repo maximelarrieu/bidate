@@ -18,9 +18,10 @@ const HistoricDates = (props) => {
     }, [dater.id])
 
     return (
-        <Fragment>
-            <h3>historique du dater</h3>
-            <ul>
+        <div className="shadow-lg p-3 mb-5 rounded text-center">
+            <h3 className="page-subtitle">Dater historic</h3>
+            <label className="mt-2">ended at </label>
+            <ul className="list-group">
             {
                 // If dater has dates
                 dates.length > 0
@@ -28,8 +29,8 @@ const HistoricDates = (props) => {
                 // True
                 dates.map((date, index) => {
                     return (
-                        <li key={index}>
-                            { date.id } { date.createdAt } -&gt; { date.endedAt }
+                        <li key={index} className="list-group-item">
+                            { new Date(date.endedAt).toISOString().slice(0, 19).replace('T', ' ') }
                         </li>
                     )
                 })
@@ -38,7 +39,7 @@ const HistoricDates = (props) => {
                 <Fragment>{error}</Fragment>
             }
             </ul>
-        </Fragment>
+        </div>
     )
 }
 

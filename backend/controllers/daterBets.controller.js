@@ -47,6 +47,28 @@ exports.update = async (req, res) => {
     }
 }
 
+exports.findAllMine = async (req, res) => {
+    const daterBets = await DaterBets.findAll(
+        {
+            where: { user_id: req.userId },
+            include: [
+                { 
+                    model: dbDate, as:'dateb',
+                    include: [
+                        {model: User, as: 'user'}
+                    ]
+                },
+                { model: User, as: 'userb' }
+            ]
+        }
+    )
+    if(daterBets.length > 0) {
+        res.status(200).send({ status: 200, daterBets: daterBets});
+    } else {
+        res.status(201).send({ status: 201, daterBets: []});
+    }
+}
+
 exports.getDaterBetsByDate = async (req, res) => {
     const params = req.params;
 
@@ -84,6 +106,7 @@ exports.daterHasBets = async (req, res) => {
 
 exports.daterHasBetsToday = async (req, res) => {
     const params = req.params
+    console.log('params day', params.day)
     const betDay = `amount_${params.day}`
 
     let sql = `

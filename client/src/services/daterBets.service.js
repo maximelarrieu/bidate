@@ -15,6 +15,10 @@ class DaterBetsService {
         return axios.get(API_URL + `dater/bets/${date_id}`, { headers: authHeader() })
     }
 
+    findAllMine() {
+        return axios.get(API_URL + `dater/my/bets/`, { headers: authHeader() })
+    }
+
     daterHasBets(date_id) {
         return axios.get(API_URL + `dater/bets/in/${date_id}`, { headers: authHeader() })
     }

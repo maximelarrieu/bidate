@@ -15,6 +15,14 @@ class HunterBetsService {
         return axios.get(API_URL + `hunter/bets/${date_id}`, { headers: authHeader() })
     }
 
+    findAllMineByDate(date_id) {
+        return axios.get(API_URL + `hunter/my/bets/by/${date_id}`, { headers: authHeader() })
+    }
+
+    findAllMine() {
+        return axios.get(API_URL + `hunter/my/bets/`, { headers: authHeader() })
+    }
+
     hunterHasBetOnDate(date_id, dater_id) {
         return axios.get(API_URL + `hunter/bets/in/${date_id}/for/${dater_id}`, { headers: authHeader() })
     }

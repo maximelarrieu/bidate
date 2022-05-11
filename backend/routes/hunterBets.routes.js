@@ -15,6 +15,8 @@ module.exports = (app) => {
     app.patch('/api/hunter/bet/:dater_id/date/:date_id/:day', [authJwt.verifyToken], controller.update)
 
     app.get('/api/hunter/bets/:date_id', [authJwt.verifyToken], controller.findAllByDate);
+    app.get('/api/hunter/my/bets/by/:date_id', [authJwt.verifyToken], controller.findAllMineByDate);
+    app.get('/api/hunter/my/bets/', [authJwt.verifyToken], controller.findAllMine);
 
     app.get('/api/hunter/bets/in/:date_id/for/:dater_id', [authJwt.verifyToken], controller.hunterHasDaterBets)
 

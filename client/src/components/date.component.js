@@ -51,18 +51,18 @@ const ADate = (props) => {
         .then(response => {
             if(response.status === 200) {
                 setDate(response.data.date)
-                dailyBet()
+                // dailyBet(date.id, currentDay(date.endedAt))
             } else {
                 setError(`No current date`);
             }
         })
         .catch(err => {
-            console.log('ERROR', err)
+            console.log('ERROR current date', err)
         })
     })
 
-    const dailyBet = () => {
-        daterBetsService.daterHasBetsToday(date.id, currentDay(date.endedAt))
+    const dailyBet = (date_id, day) => {
+        daterBetsService.daterHasBetsToday(date_id, day)
         .then(response => {
             if (response.data.status === true) {
                 setTodayBet(response.data.status)
@@ -147,7 +147,7 @@ const ADate = (props) => {
                 .then(response => {
                     console.log('reponse', response)
                     sendTransaction(amount)
-                    dailyBet(date_id, )
+                    dailyBet(date_id, day)
                 })
                 .catch(error => {
                     console.log("ERROR", error)
@@ -207,14 +207,20 @@ const ADate = (props) => {
                                             return 'Loading...'
                                         }
 
-                                return (
-                                    <div className="input-group text-center">
-                                        <form onSubmit={sendTransaction}>
-                                            <input type="text" className="form-control" name={amount} placeholder="Amount (ETH)" onChange={e => setAmount(e.target.value)} />
-                                            <input type="submit" value="Make a bet" className="btn btn-warning" onClick={(e) => toBet(e, date.id, amount, currentDay(date.endedAt))} />
-                                        </form>
-                                    </div>
-                                )
+                                        if(currentUser.type_id === 2) {
+                                            return (
+                                                <p></p>
+                                            )
+                                        } else {
+                                            return (
+                                                <div className="input-group text-center align-items-center">
+                                                    <form onSubmit={sendTransaction}>
+                                                        <input type="text" className="form-control" name={amount} placeholder="Amount (ETH)" onChange={e => setAmount(e.target.value)} />
+                                                        <input type="submit" value="Make a bet" className="btn btn-warning" onClick={(e) => toBet(e, date.id, amount, currentDay(date.endedAt))} />
+                                                    </form>
+                                                </div>
+                                            ) 
+                                        }
                                         }}
                                     </DrizzleContext.Consumer>
                                 </DrizzleContext.Provider>

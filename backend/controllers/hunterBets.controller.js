@@ -54,9 +54,48 @@ exports.findAllByDate = async (req, res) => {
 
     const hunterBets = await HunterBets.findAll(
         {
+            where: { date_id: params.date_id },
+            include: [
+                { model: User, as: 'daterh' },
+                { model: User, as: 'userh' },
+                { model: Date, as: 'dateh' }
+            ]
+        }
+    )
+    if(hunterBets.length > 0) {
+        res.status(200).send({ status: 200, hunterBets: hunterBets});
+    } else {
+        res.status(201).send({ status: 201, hunterBets: []});
+    }
+}
+
+exports.findAllMineByDate = async (req, res) => {
+    const params = req.params;
+
+    const hunterBets = await HunterBets.findAll(
+        {
             where: { user_id: req.userId, date_id: params.date_id },
             include: [
                 { model: User, as: 'daterh' },
+                { model: User, as: 'userh' },
+                { model: Date, as: 'dateh' }
+            ]
+        }
+    )
+    if(hunterBets.length > 0) {
+        res.status(200).send({ status: 200, hunterBets: hunterBets});
+    } else {
+        res.status(201).send({ status: 201, hunterBets: []});
+    }
+}
+
+exports.findAllMine = async (req, res) => {
+    const hunterBets = await HunterBets.findAll(
+        {
+            where: { user_id: req.userId },
+            include: [
+                { model: User, as: 'daterh' },
+                { model: User, as: 'userh' },
                 { model: Date, as: 'dateh' }
             ]
         }

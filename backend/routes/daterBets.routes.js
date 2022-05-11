@@ -16,7 +16,9 @@ module.exports = (app) => {
 
     app.get('/api/dater/bets/:date_id', [authJwt.verifyToken], controller.getDaterBetsByDate);
 
-    app.get('/api/dater/bets/in/:date_id', [authJwt.verifyToken], controller.daterHasBets)
+    app.get('/api/dater/bets/in/:date_id', [authJwt.verifyToken], controller.daterHasBets);
+
+    app.get('/api/dater/my/bets', [authJwt.verifyToken], controller.findAllMine);
 
     app.get('/api/dater/bets/in/:date_id/today/:day', [authJwt.verifyToken], controller.daterHasBetsToday)
     // app.get('/api/daters', [authJwt.verifyToken], controller.getDaters);
